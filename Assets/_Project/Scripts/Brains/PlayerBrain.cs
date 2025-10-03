@@ -5,14 +5,10 @@ namespace _Project.Scripts.Brains
 {
     public class PlayerBrain : MonoBehaviour, IMoveBrain
     {
-        private void Awake()
+        private void Start()
         {
-            Debug.LogWarning("The input system has been found manually. In future, configure the start function calls in the correct order."
-                + (InputManager.Instance == null ? " InputManager not found." : " InputManager found."));
-            // InputManager.Instance?.GetInput("Horizontal", (context => { Horizontal = context.ReadValue<float>(); }));
-            
-            FindAnyObjectByType<InputManager>()?.GetInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
-            FindAnyObjectByType<InputManager>()?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
+            InputManager.Instance?.GetInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
+            InputManager.Instance?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
         }
         
         // Interface
