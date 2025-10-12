@@ -7,7 +7,7 @@ namespace _Project.Scripts.Brains
     {
         private void Start()
         {
-            InputManager.Instance?.GetInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
+            InputManager.Instance?.GetAllInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
             InputManager.Instance?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
         }
         

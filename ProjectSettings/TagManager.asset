@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Resource
   layers:
   - Default
   - TransparentFX
@@ -45,7 +46,7 @@ TagManager:
     uniqueID: 144090099
     locked: 0
   - name: Objects
-    uniqueID: 0
+    uniqueID: 2698273255
     locked: 0
   - name: Player
     uniqueID: 72392703
@@ -57,7 +58,7 @@ TagManager:
     uniqueID: 838229361
     locked: 0
   - name: UI World
-    uniqueID: 0
+    uniqueID: 4085897923
     locked: 0
   - name: UI
     uniqueID: 2860193523
