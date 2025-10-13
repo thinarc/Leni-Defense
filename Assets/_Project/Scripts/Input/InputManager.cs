@@ -20,8 +20,8 @@ namespace _Project.Scripts.Input
                 return;
             }
             Instance = this;
-            _input = GetComponent<PlayerInput>();
             
+            _input = GetComponent<PlayerInput>();
             _actions = new List<BindedAction>();
         }
 

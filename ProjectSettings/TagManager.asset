@@ -4,16 +4,19 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Resource
+  - Coin
+  - Ruby
+  - CoinUI
+  - RubyUI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Resource
   - Water
   - UI
-  - 
-  - 
+  - CoinUI
+  - RubyUI
   - 
   - 
   - 
