@@ -69,10 +69,6 @@ PrefabInstance:
       value: Ruby
       objectReference: {fileID: 0}
     - target: {fileID: 5233559774868837069, guid: a40083364b1af454eb22a4478970d958, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5233559774868837069, guid: a40083364b1af454eb22a4478970d958, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

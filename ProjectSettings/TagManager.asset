@@ -12,7 +12,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Resource
+  - Loot
   - Water
   - UI
   - CoinUI
@@ -45,23 +45,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Lower
+  - name: LBackground
     uniqueID: 144090099
     locked: 0
-  - name: Objects
+  - name: LObjects
     uniqueID: 2698273255
+    locked: 0
+  - name: Npc
+    uniqueID: 1919654465
     locked: 0
   - name: Player
     uniqueID: 72392703
     locked: 0
-  - name: Characters
-    uniqueID: 1919654465
+  - name: UBackground
+    uniqueID: 1164058745
     locked: 0
-  - name: Upper
+  - name: UObjects
     uniqueID: 838229361
-    locked: 0
-  - name: UI World
-    uniqueID: 4085897923
     locked: 0
   - name: UI
     uniqueID: 2860193523

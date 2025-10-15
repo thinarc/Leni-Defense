@@ -1,81 +1,79 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 using DG.Tweening;
-
 namespace _Project.Scripts.WalletArea
 {
     public class PlayerWallet : MonoBehaviour, IWallet
     {
-        [FormerlySerializedAs("physics")] [SerializeField] private PlayerPhysicWallet physicWallet;
+        public static PlayerWallet Instance { get; private set; }
+        
+        [SerializeField] private PlayerPhysicWallet physicWallet;
         
         [SerializeField, Space(5)] private Transform player;
-        [SerializeField] private Vector2 spawnOffset;
-        [SerializeField] private Transform parentSpawn;
+        [SerializeField] private Vector2 throwOffset;
+        [SerializeField] private Transform parentThrow;
         
-        public int Coins { get; private set; }
-        public int Rubies { get; private set; }
+        private float Flip => player.localScale.x >= 0 ? 1 : -1;
+        public Vector2 ThrowOffset => throwOffset;
+        public Transform ParentThrow => parentThrow;
         
-        public static Vector2 SpawnOffset;
-        public static Transform ParentSpawn;
+        private int Coins { get; set; }
+        private int Rubies { get; set; }
+        
         private void Awake()
         {
-            SpawnOffset = spawnOffset;
-            ParentSpawn = parentSpawn;
-        }
-        private void OnDisable()
-        {
-            SpawnOffset = Vector2.zero;
-            ParentSpawn = null;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
         }
         
-        public bool AddResource(ResourceType resourceType)
+        public bool AddCurrency(int lootType)
         {
-            if (resourceType == ResourceType.Coin) Coins++;
+            if (lootType == 0) Coins++;
             else Rubies++;
-            physicWallet.RegisterResource(resourceType);
+            physicWallet.RegisterCurrency(lootType);
             return true;
         }
 
-        public bool ThrowResource()
+        public bool ThrowCurrency()
         {
-            if (!physicWallet.TryFindAnyResource(out ResourceType? foundType)) return false;
-            if (foundType == ResourceType.Coin) Coins--;
-            else if (foundType == ResourceType.Ruby) Rubies--;
-            float flip = player.localScale.x >= 0 ? 1 : -1;
-            SpawnResource(foundType, (Vector2)player.position + new Vector2(spawnOffset.x * flip, spawnOffset.y), parentSpawn, flip);
+            if (!physicWallet.TryFindAnyCurrency(out var foundType)) return false;
+            if (foundType == 0) Coins--;
+            else Rubies--;
+            SpawnLoot(foundType, (Vector2)player.position + new Vector2(throwOffset.x * Flip, throwOffset.y), parentThrow, Flip);
             return true;
         }
-        public float Flip => player.localScale.x >= 0 ? 1 : -1;
-        public void ConcreteSpawnResource(ResourceType resourceType) => SpawnResource(resourceType, (Vector2)player.position + new Vector2(spawnOffset.x * Flip, spawnOffset.y), parentSpawn, Flip);
         
-        public bool SpendResource(ResourceType resourceType)
+        public bool SpendCurrency(int currencyType)
         {
-            if (!physicWallet.TryFindByResource(resourceType)) return false;
-            if (resourceType == ResourceType.Coin) Coins--;
+            if (!physicWallet.TryFindByCurrency(currencyType)) return false;
+            if (currencyType == 0) Coins--;
             else Rubies--;
             return true;
         }
-        public void ManualSpendResource(ResourceType resourceType)
+        public void ManualSpendCurrency(int currencyType)
         {
-            if (resourceType == ResourceType.Coin) Coins--;
+            if (currencyType == 0) Coins--;
             else Rubies--;
         }
         
-        public static void SpawnResource(ResourceType? resourceType, Vector2 spawnPos, Transform parent, float flip = 1)
+        public static void SpawnLoot(int? lootType, Vector2 spawnPos, Transform spawnParent, float flip = 1)
         {
-            if (resourceType == null) return;
-            var prefab = Resources.Load<GameObject>(resourceType.Value.ToString());
-            var res = Instantiate(prefab, spawnPos, Quaternion.identity).transform;
-            res.SetParent(parent);
-            float randVariation = 1 + Random.Range(-0.3f, 0.3f);
-            res.DOMove((Vector2)res.position + new Vector2(1 * flip, 0.7f) * randVariation, 0.23f * randVariation).SetEase(Ease.OutQuad);
+            if (lootType == null) return;
+            var prefab = Resources.Load<GameObject>(lootType == 0 ? "Coin" : "Ruby");
+            var loot = Instantiate(prefab, spawnPos, Quaternion.identity).transform;
+            loot.SetParent(spawnParent);
+            var randVariation = 1 + Random.Range(-0.31f, 0.31f);
+            loot.DOMove((Vector2)loot.position + new Vector2(1 * flip, 0.7f) * randVariation, 0.25f).SetEase(Ease.OutQuad);
         }
         
-        [Button, Title("Debug"), PropertySpace(3)] private void AddCoin() => AddResource(ResourceType.Coin);
-        [Button] private void AddRuby() => AddResource(ResourceType.Ruby);
-        [Button] private void SpendCoin() => SpendResource(ResourceType.Coin);
-        [Button] private void SpendRuby() => SpendResource(ResourceType.Ruby);
-        [Button] private void ThrowAny() => ThrowResource();
+        [Button, Title("Debug"), PropertySpace(5)] private void AddCoin() => AddCurrency(0);
+        [Button] private void AddRuby() => AddCurrency(1);
+        [Button] private void SpendCoin() => SpendCurrency(0);
+        [Button] private void SpendRuby() => SpendCurrency(1);
+        [Button] private void ThrowAny() => ThrowCurrency();
     }
 }

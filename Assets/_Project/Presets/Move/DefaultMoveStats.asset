@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1828fccc01e94dc9b18891c96c1696db, type: 3}
-  m_Name: PlayerStats
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Stats.MovementStats
-  SnapInput: 1
-  HorizontalDeadZoneThreshold: 0.1
-  MaxSpeed: 14
-  Acceleration: 120
-  GroundDeceleration: 60
-  GroundingForce: -1.5
+  m_Name: DefaultMoveStats
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Movement.MovementStats
+  maxSpeed: 14
+  sprintModifier: 1.4
+  acceleration: 120
+  deceleration: 60

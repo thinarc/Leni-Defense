@@ -34,7 +34,7 @@ namespace _Project.Scripts.Movement
             
             if (_moveBrain.Horizontal == 0)
             {
-                var deceleration = stats.groundDeceleration;
+                var deceleration = stats.deceleration;
                 _frameVelocityX = Mathf.MoveTowards(_frameVelocityX, 0, deceleration * Time.fixedDeltaTime);
             }
             else

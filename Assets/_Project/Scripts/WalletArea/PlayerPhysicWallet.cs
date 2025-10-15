@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using System.Collections.Generic;
 
 namespace _Project.Scripts.WalletArea
 {
@@ -7,40 +7,45 @@ namespace _Project.Scripts.WalletArea
     {
         [SerializeField, Space(5)] private PlayerWallet wallet;
         
-        [FormerlySerializedAs("coinPrefab")] [SerializeField] private GameObject uiCoinPrefab;
-        [FormerlySerializedAs("rubyPrefab")] [SerializeField] private GameObject uiRubyPrefab;
+        [SerializeField, Space(5)] private GameObject coinUiPrefab;
+        [SerializeField] private GameObject rubyUiPrefab;
         
         [SerializeField, Space(5)] private Vector2 spawnPoint;
-        [FormerlySerializedAs("coinLayer")] [SerializeField, Space(5)] private LayerMask uiCoinLayer;
-        [FormerlySerializedAs("rubyLayer")] [SerializeField] private LayerMask uiRubyLayer;
+        [SerializeField, Space(5)] private LayerMask coinUiLayer;
+        [SerializeField] private LayerMask rubyUiLayer;
+
+        private readonly List<GameObject> _registeredCurrency = new();
         
-        public void RegisterResource(ResourceType resourceType)
+        public void RegisterCurrency(int currencyType)
         {
-            var prefab = resourceType == ResourceType.Coin ? uiCoinPrefab : uiRubyPrefab;
-            var res = Instantiate(prefab, spawnPoint + (Vector2)transform.position, Quaternion.identity);
-            res.transform.SetParent(transform);
-            res.transform.localScale = prefab.transform.localScale;
-            var pos = res.transform.localPosition;
+            var prefab = currencyType == 0 ? coinUiPrefab : rubyUiPrefab;
+            var randVariation = 1 + Random.Range(-0.1f, 0.1f);
+            spawnPoint.y *= randVariation;
+            var currency = Instantiate(prefab, (Vector2)transform.position + spawnPoint, Quaternion.identity);
+            currency.transform.SetParent(transform);
+            currency.transform.localScale = prefab.transform.localScale;
+            var pos = currency.transform.localPosition;
             pos.z = 0;
-            res.transform.localPosition = pos;
+            currency.transform.localPosition = pos;
+            _registeredCurrency.Add(currency);
         }
         
-        public bool TryFindByResource(ResourceType resourceType)
+        public bool TryFindByCurrency(int currencyType)
         {
-            LayerMask mask = resourceType == ResourceType.Coin ? uiCoinLayer : uiRubyLayer;
-            return TryFindResource(mask, out _);
+            var mask = currencyType == 0 ? coinUiLayer : rubyUiLayer;
+            return TryFindCurrency(mask, out _);
         }
         
-        public bool TryFindAnyResource(out ResourceType? resourceType)
+        public bool TryFindAnyCurrency(out int? currencyType)
         {
-            LayerMask mask = uiCoinLayer | uiRubyLayer;
-            return TryFindResource(mask, out resourceType);
+            var mask = coinUiLayer | rubyUiLayer;
+            return TryFindCurrency(mask, out currencyType);
         }
 
-        private bool TryFindResource(LayerMask targetMask, out ResourceType? foundResourceType)
+        private bool TryFindCurrency(LayerMask targetMask, out int? foundType)
         {
-            RaycastHit2D hit = Physics2D.CapsuleCast(
-                origin: spawnPoint + (Vector2)transform.position,
+            var hit = Physics2D.CapsuleCast(
+                origin: (Vector2)transform.position + spawnPoint,
                 size: new Vector2(1f, 1f),
                 capsuleDirection: CapsuleDirection2D.Vertical,
                 angle: 0f,
@@ -51,31 +56,31 @@ namespace _Project.Scripts.WalletArea
 
             if (hit.collider)
             {
-                foundResourceType = hit.collider.CompareTag("CoinUI") ? ResourceType.Coin : ResourceType.Ruby;
-                DisposeUiResource(hit.collider.gameObject);
+                foundType = hit.collider.CompareTag("CoinUI") ? 0 : 1;
+                DestroyUiObject(hit.collider.gameObject);
                 return true;
             }
 
-            foundResourceType = null;
+            foundType = null;
             return false;
         }
 
-        private void DisposeUiResource(GameObject res) => Destroy(res);
-        // private void ThrowUiResource(GameObject res) => wallet.ConcreteSpawnResource(res.CompareTag("CoinUI") ? ResourceType.Coin : ResourceType.Ruby);
-        private void LoseResource(GameObject res)
+        private static void DestroyUiObject(GameObject obj) => Destroy(obj);
+        private void OnTriggerExit2D(Collider2D other) => LoseCurrency(other.gameObject);
+        private void LoseCurrency(GameObject currency)
         {
-            DisposeUiResource(res);
-            wallet.ManualSpendResource(res.CompareTag("CoinUI") ? ResourceType.Coin : ResourceType.Ruby);
+            if (!currency.CompareTag("CoinUI") && !currency.CompareTag("RubyUI")) return;
+            if (!_registeredCurrency.Contains(currency)) return;
+            _registeredCurrency.Remove(currency.gameObject);
+            DestroyUiObject(currency);
+            wallet.ManualSpendCurrency(currency.CompareTag("CoinUI") ? 0 : 1);
         }
-        // Проблема в том что он срабатывает даже когда мы утилизируем ресурс посредством TryFindResource, а не
-        // когда ресурс действительно вылетает из кошелька
-        private void OnTriggerExit2D(Collider2D other) { if (other.CompareTag("CoinUI") || other.CompareTag("RubyUI")) LoseResource(other.gameObject); }
 
-
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(spawnPoint + (Vector2)transform.position, 0.06f);
+            Gizmos.DrawSphere((Vector2)transform.position + spawnPoint, 0.076f);
         }
     }
 }

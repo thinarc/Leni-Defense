@@ -9,6 +9,6 @@ namespace _Project.Scripts.Movement
         public float maxSpeed = 14;
         public float sprintModifier = 1.4f;
         public float acceleration = 120;
-        public float groundDeceleration = 60;
+        public float deceleration = 60;
     }
 }
