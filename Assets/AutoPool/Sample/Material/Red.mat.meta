@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90c063c8caefb684b839bee9ba79055d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/Sample/Material/Red.mat
+  uploadId: 803120

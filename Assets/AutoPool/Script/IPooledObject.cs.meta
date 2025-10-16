@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 0ae3e10e3c84f694aacd1099825d6cce
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/Script/IPooledObject.cs
+  uploadId: 803120

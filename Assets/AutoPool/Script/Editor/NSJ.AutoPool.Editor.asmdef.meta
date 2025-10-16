@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 055233ba3d0d4364ebc09d477312314f
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/Script/Editor/NSJ.AutoPool.Editor.asmdef
+  uploadId: 803120

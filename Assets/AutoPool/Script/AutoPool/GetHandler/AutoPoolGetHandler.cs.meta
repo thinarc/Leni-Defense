@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 898edffb0bf748747bfe19b51a16b070
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/Script/AutoPool/GetHandler/AutoPoolGetHandler.cs
+  uploadId: 803120

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e4fbf10f13b325e40bc82fba2e27c134
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/Sample/Prefab/Cube.prefab
+  uploadId: 803120

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ce8a1051b4d5ea945af4f415e0be4cd2
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324493
+  packageName: NSJ_AutoPool
+  packageVersion: 1.0
+  assetPath: Assets/AutoPool/README.md
+  uploadId: 803120
