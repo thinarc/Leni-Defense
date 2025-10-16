@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.alicanhasirci.texttween": {
+      "version": "file:com.alicanhasirci.texttween",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.coffee.softmask-for-ugui": {
       "version": "https://github.com/mob-sakai/SoftMaskForUGUI.git?path=Packages/src",
       "depth": 0,
@@ -8,6 +14,15 @@
         "com.unity.ugui": "1.0.0"
       },
       "hash": "19b5e068f8fdb93bec80c803122ef2ab7202922f"
+    },
+    "com.luca3317.tmpeffects": {
+      "version": "https://github.com/Luca3317/TMPEffects.git?path=/Package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "9840de5d5a60b0f7e30f23c7d5e1357420c9886e"
     },
     "com.unity.2d.animation": {
       "version": "12.0.2",
@@ -351,6 +366,14 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.textmeshpro": {
+      "version": "5.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      }
+    },
     "com.unity.timeline": {
       "version": "1.8.9",
       "depth": 0,
@@ -381,6 +404,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.vd3v.sprite-swap-morph": {
+      "version": "https://github.com/V0odo0/Sprite-Swap-Morph.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a534fd6c83aa9ad43e8b0a21c7fa93f0a6d65f25"
     },
     "dev.ameye.linework-lite": {
       "version": "file:dev.ameye.linework-lite",
