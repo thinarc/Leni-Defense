@@ -14,12 +14,13 @@ namespace _Project.Scripts.Input
 
         private void Awake()
         {
-            if (Instance != null && Instance != this)
+            if (Instance == null)
             {
-                Destroy(gameObject);
-                return;
+                Instance = this;
+                transform.SetParent(null);
+                DontDestroyOnLoad(gameObject);
             }
-            Instance = this;
+            else Destroy(gameObject);
             
             _input = GetComponent<PlayerInput>();
             _actions = new List<BindedAction>();
@@ -66,7 +67,7 @@ namespace _Project.Scripts.Input
         }
     }
     
-    public class BindedAction
+    public struct BindedAction
     {
         public InputAction Action;
         public Action<InputAction.CallbackContext> Callback;

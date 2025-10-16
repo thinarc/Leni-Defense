@@ -33,9 +33,11 @@ namespace _Project.Scripts.Abilities.LootHandlers
         public void OnCaughtLoot(GameObject loot)
         {
             if (_wallet.AddCurrency(loot.CompareTag("Coin") ? 0 : 1))
+            {
                 Object.Destroy(loot);
-            else
-                Physics2D.IgnoreCollision(_collider, loot.GetComponent<Collider2D>());
+                _delay = _interactDelay;
+            }
+            else Physics2D.IgnoreCollision(_collider, loot.GetComponent<Collider2D>());
         }
 
         public void OnInteract()

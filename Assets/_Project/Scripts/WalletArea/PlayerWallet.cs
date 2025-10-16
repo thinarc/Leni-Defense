@@ -22,12 +22,8 @@ namespace _Project.Scripts.WalletArea
         
         private void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
         }
         
         public bool AddCurrency(int lootType)
