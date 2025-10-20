@@ -24,6 +24,15 @@
       },
       "hash": "9840de5d5a60b0f7e30f23c7d5e1357420c9886e"
     },
+    "com.singularitygroup.hotreload": {
+      "version": "file:com.singularitygroup.hotreload",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      }
+    },
     "com.unity.2d.animation": {
       "version": "12.0.2",
       "depth": 0,
@@ -404,13 +413,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.vd3v.sprite-swap-morph": {
-      "version": "https://github.com/V0odo0/Sprite-Swap-Morph.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a534fd6c83aa9ad43e8b0a21c7fa93f0a6d65f25"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
