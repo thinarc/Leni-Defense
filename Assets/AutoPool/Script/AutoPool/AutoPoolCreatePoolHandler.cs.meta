@@ -1,9 +1,0 @@
-fileFormatVersion: 2
-guid: 4952e5ee552e35c4c82fbfab5ce65297
-AssetOrigin:
-  serializedVersion: 1
-  productId: 324493
-  packageName: NSJ_AutoPool
-  packageVersion: 1.0
-  assetPath: Assets/AutoPool/Script/AutoPool/AutoPoolCreatePoolHandler.cs
-  uploadId: 803120

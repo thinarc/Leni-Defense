@@ -1,5 +1,0 @@
-{
-  "name": "NSJ.AutoPool.Editor",
-  "references": [ "NSJ.AutoPool" ],
-  "includePlatforms": [ "Editor" ]
-}
