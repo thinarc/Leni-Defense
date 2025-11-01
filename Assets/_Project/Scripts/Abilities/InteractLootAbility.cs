@@ -17,8 +17,8 @@ namespace _Project.Scripts.Abilities
         
         private IInteractLootAbility _handler;
 
-        private void Start() => InitializeHandler();
-        [Button("Reinitialize Handler When The Type Is Changed"), PropertySpace(5)]
+        public void Initialize() => InitializeHandler();
+        [Button("Initialize manually"), PropertySpace(5)]
         private void InitializeHandler()
         {
             _handler = controlType switch

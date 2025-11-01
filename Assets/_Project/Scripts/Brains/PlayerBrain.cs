@@ -5,7 +5,7 @@ namespace _Project.Scripts.Brains
 {
     public class PlayerBrain : MonoBehaviour, IMoveBrain
     {
-        private void Start()
+        public void Initialize()
         {
             InputManager.Instance?.GetAllInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
             InputManager.Instance?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));

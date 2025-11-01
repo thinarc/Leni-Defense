@@ -7,8 +7,12 @@ namespace _Project.Scripts.EntryPoints
 {
     public class BootstrapEntryPoint : MonoBehaviour
     {
+        [SerializeField] private LoadingManager loadingManager;
+        
         private async void Start()
         {
+            loadingManager.Initialize();
+            
             var fakeService1 = new FakeService();
             var fakeService2 = new FakeService();
             var fakeService3 = new FakeService();

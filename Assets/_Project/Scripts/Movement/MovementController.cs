@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Movement
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(IMoveBrain))]
     public class MovementController : MonoBehaviour
     {
         [SerializeField] private MovementStats stats;
@@ -11,17 +11,22 @@ namespace _Project.Scripts.Movement
         private IMoveBrain _moveBrain;
         private float _frameVelocityX;
         private bool _isFacingRight;
+        
+        private bool _initialized;
 
-        private void Awake()
+        public void Initialize()
         {
             _rb = GetComponent<Rigidbody2D>();
             _moveBrain = GetComponent<IMoveBrain>();
             
             _isFacingRight = transform.localScale.x >= 0;
+            
+            _initialized = true;
         }
 
         private void FixedUpdate()
         {
+            if (!_initialized) return;
             HandleDirection();
             ApplyMovement();
         }

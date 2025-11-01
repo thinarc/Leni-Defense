@@ -20,7 +20,7 @@ namespace _Project.Scripts.WalletArea
         private int Coins { get; set; }
         private int Rubies { get; set; }
         
-        private void Awake()
+        public void Initialize()
         {
             if (Instance == null) Instance = this;
             else Destroy(gameObject);

@@ -11,8 +11,10 @@ namespace _Project.Scripts.Input
         private PlayerInput _input;
         
         private List<BindedAction> _actions;
+        
+        private bool _initialized;
 
-        private void Awake()
+        public void Initialize()
         {
             if (Instance == null)
             {
@@ -24,6 +26,8 @@ namespace _Project.Scripts.Input
             
             _input = GetComponent<PlayerInput>();
             _actions = new List<BindedAction>();
+            
+            _initialized = true;
         }
 
         public void GetInput(string actionName, Action<InputAction.CallbackContext> callback, bool performed = true)
@@ -52,6 +56,7 @@ namespace _Project.Scripts.Input
         
         private void OnEnable()
         {
+            if (!_initialized) return;
             _input.enabled = true;
         }
         

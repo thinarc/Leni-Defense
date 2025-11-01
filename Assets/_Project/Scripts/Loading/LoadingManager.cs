@@ -15,7 +15,7 @@ namespace _Project.Scripts.Loading
         public Slider progressBar;
         public TMP_Text statusText;
 
-        private void Awake()
+        public void Initialize()
         {
             if (Instance == null)
             {
