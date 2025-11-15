@@ -2,9 +2,9 @@ using _Project.Scripts.Input;
 using _Project.Scripts.WalletArea;
 using UnityEngine;
 
-namespace _Project.Scripts.Abilities.LootHandlers
+namespace _Project.Scripts.Abilities.InteractLoot.LootHandlers
 {
-    public class PlayerInteractLootAbility : IInteractLootAbility
+    public class PlayerInteractLootAbility : IInteractLootAbility, ITickable
     {
         private readonly IWallet _wallet;
         private readonly float _interactDelay;
@@ -19,7 +19,7 @@ namespace _Project.Scripts.Abilities.LootHandlers
             InputManager.Instance?.GetAllInput("Interact", context => _interacted = context.performed);
         }
 
-        public void ManualUpdate()
+        public void Tick()
         {
             if (_interacted && _delay <= 0f)
             {

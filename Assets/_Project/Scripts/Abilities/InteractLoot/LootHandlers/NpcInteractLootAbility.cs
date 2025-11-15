@@ -1,9 +1,9 @@
 using _Project.Scripts.WalletArea;
 using UnityEngine;
 
-namespace _Project.Scripts.Abilities.LootHandlers
+namespace _Project.Scripts.Abilities.InteractLoot.LootHandlers
 {
-    public class NpcInteractLootAbility : IInteractLootAbility
+    public class NpcInteractLootAbility : IInteractLootAbility, ITickable
     {
         private readonly IWallet _wallet;
         private readonly float _interactDelay;
@@ -20,7 +20,7 @@ namespace _Project.Scripts.Abilities.LootHandlers
             _collider = collider;
         }
         
-        public void ManualUpdate()
+        public void Tick()
         {
             if (_interacted && _delay <= 0f)
             {

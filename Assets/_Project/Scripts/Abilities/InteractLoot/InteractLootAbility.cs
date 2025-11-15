@@ -1,9 +1,9 @@
-using UnityEngine;
-using Sirenix.OdinInspector;
+using _Project.Scripts.Abilities.InteractLoot.LootHandlers;
 using _Project.Scripts.WalletArea;
-using _Project.Scripts.Abilities.LootHandlers;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
-namespace _Project.Scripts.Abilities
+namespace _Project.Scripts.Abilities.InteractLoot
 {
     public class InteractLootAbility : MonoBehaviour
     {
@@ -32,7 +32,8 @@ namespace _Project.Scripts.Abilities
         
         private void Update()
         {
-            _handler.ManualUpdate();
+            if (_handler is ITickable tickable)
+                tickable.Tick();
         }
 
         private void OnTriggerEnter2D(Collider2D other)

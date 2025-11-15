@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace _Project.Scripts.Brains
 {
-    public class PlayerBrain : MonoBehaviour, IMoveBrain
+    public class PlayerMoveBrain : MoveBrain
     {
-        public void Initialize()
+        public PlayerMoveBrain Initialize()
         {
             InputManager.Instance?.GetAllInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
             InputManager.Instance?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
+            return this;
         }
         
-        // Interface
-        public float Horizontal { get; private set; }
-        public bool IsSprinting { get; private set; }
+        public override float Horizontal { get; protected set; }
+        public override bool IsSprinting { get; protected set; }
     }
 }

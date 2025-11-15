@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Abilities.LootHandlers
+namespace _Project.Scripts.Abilities.InteractLoot.LootHandlers
 {
     public class EnemyInteractLootAbility : IInteractLootAbility
     {

@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace _Project.Scripts.Movement
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(IMoveBrain))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class MovementController : MonoBehaviour
     {
         [SerializeField] private MovementStats stats;
         private Rigidbody2D _rb;
-        private IMoveBrain _moveBrain;
+        private MoveBrain _moveBrain;
         private float _frameVelocityX;
         private bool _isFacingRight;
         
         private bool _initialized;
 
-        public void Initialize()
+        public void Initialize(MoveBrain moveBrain)
         {
             _rb = GetComponent<Rigidbody2D>();
-            _moveBrain = GetComponent<IMoveBrain>();
+            _moveBrain = moveBrain;
             
             _isFacingRight = transform.localScale.x >= 0;
             
