@@ -1,15 +1,19 @@
 using _Project.Scripts.Input;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Brains
 {
-    public class PlayerMoveBrain : MoveBrain
+    public class PlayerMoveBrain : MoveBrain, IInitializable
     {
-        public PlayerMoveBrain Initialize()
+        private readonly InputManager _input;
+
+        public PlayerMoveBrain(InputManager input) => _input = input;
+        
+        public void Initialize()
         {
-            InputManager.Instance?.GetAllInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
-            InputManager.Instance?.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
-            return this;
+            _input.GetAllInput("Horizontal", (context => { Horizontal = context.ReadValue<Vector2>().x; }));
+            _input.GetAllInput("Sprint", (context => { IsSprinting = context.performed; }));
         }
         
         public override float Horizontal { get; protected set; }

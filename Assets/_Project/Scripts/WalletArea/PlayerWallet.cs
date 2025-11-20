@@ -1,31 +1,36 @@
+using _Project.Scripts.Movement;
+using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using Zenject;
+
 namespace _Project.Scripts.WalletArea
 {
-    public class PlayerWallet : MonoBehaviour, IWallet
+    public class PlayerWallet : MonoBehaviour, IWallet, IInitializable
     {
-        public static PlayerWallet Instance { get; private set; }
-        
         [SerializeField] private PlayerPhysicWallet physicWallet;
         
-        [SerializeField, Space(5)] private Transform player;
-        [SerializeField] private Vector2 throwOffset;
+        [SerializeField, Space(5)] private Vector2 throwOffset;
         [SerializeField] private Transform parentThrow;
+        [SerializeField, Header("Debug")] private MovementController player;
         
-        private float Flip => player.localScale.x >= 0 ? 1 : -1;
-        public Vector2 ThrowOffset => throwOffset;
-        public Transform ParentThrow => parentThrow;
+        private float Flip => player.transform.localScale.x >= 0 ? 1 : -1;
+        public static Vector2 ThrowOffset;
+        public static Transform ParentThrow;
+
+        [Inject]
+        public void Construct(List<MovementController> movementControllers) => player = movementControllers[0];
         
         private int Coins { get; set; }
         private int Rubies { get; set; }
-        
+
         public void Initialize()
         {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
+            ThrowOffset = throwOffset;
+            ParentThrow = parentThrow;
         }
-        
+
         public bool AddCurrency(int lootType)
         {
             if (lootType == 0) Coins++;
@@ -39,7 +44,7 @@ namespace _Project.Scripts.WalletArea
             if (!physicWallet.TryFindAnyCurrency(out var foundType)) return false;
             if (foundType == 0) Coins--;
             else Rubies--;
-            SpawnLoot(foundType, (Vector2)player.position + new Vector2(throwOffset.x * Flip, throwOffset.y), parentThrow, Flip);
+            SpawnLoot(foundType, (Vector2)player.transform.position + new Vector2(throwOffset.x * Flip, throwOffset.y), parentThrow, Flip);
             return true;
         }
         

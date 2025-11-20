@@ -9,21 +9,9 @@ namespace _Project.Scripts.Loading
 {
     public class LoadingManager : MonoBehaviour
     {
-        public static LoadingManager Instance { get; private set; }
-        
         public GameObject loadingUi;
         public Slider progressBar;
         public TMP_Text statusText;
-
-        public void Initialize()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else Destroy(gameObject);
-        }
 
         public async UniTask LoadSceneAsync(string sceneName, List<LoadingStep> steps)
         {

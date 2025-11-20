@@ -1,10 +1,11 @@
 using _Project.Scripts.Brains;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Movement
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public class MovementController : MonoBehaviour
+    public class MovementController : MonoBehaviour, IInitializable
     {
         [SerializeField] private MovementStats stats;
         private Rigidbody2D _rb;
@@ -14,13 +15,14 @@ namespace _Project.Scripts.Movement
         
         private bool _initialized;
 
-        public void Initialize(MoveBrain moveBrain)
+        [Inject]
+        private void Construct(MoveBrain moveBrain) => _moveBrain = moveBrain;
+
+        public void Initialize()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _moveBrain = moveBrain;
             
             _isFacingRight = transform.localScale.x >= 0;
-            
             _initialized = true;
         }
 
@@ -35,7 +37,7 @@ namespace _Project.Scripts.Movement
 
         private void HandleDirection()
         {
-            float sprintModifier = _moveBrain.IsSprinting ? stats.sprintModifier : 1f;
+            var sprintModifier = _moveBrain.IsSprinting ? stats.sprintModifier : 1f;
             
             if (_moveBrain.Horizontal == 0)
             {

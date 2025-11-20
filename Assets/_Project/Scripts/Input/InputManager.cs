@@ -2,28 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace _Project.Scripts.Input
 {
-    public class InputManager : MonoBehaviour
+    public class InputManager : MonoBehaviour, IInitializable
     {
-        public static InputManager Instance { get; private set; }
         private PlayerInput _input;
         
         private List<BindedAction> _actions;
         
         private bool _initialized;
-
+        
         public void Initialize()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                transform.SetParent(null);
-                DontDestroyOnLoad(gameObject);
-            }
-            else Destroy(gameObject);
-            
             _input = GetComponent<PlayerInput>();
             _actions = new List<BindedAction>();
             

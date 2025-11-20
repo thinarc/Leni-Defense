@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1828fccc01e94dc9b18891c96c1696db, type: 3}
   m_Name: DefaultMoveStats
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Movement.MovementStats
-  maxSpeed: 14
+  maxSpeed: 10
   sprintModifier: 1.4
   acceleration: 120
   deceleration: 60

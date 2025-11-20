@@ -1,5 +1,6 @@
 using _Project.Scripts.WalletArea;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Abilities.InteractLoot.LootHandlers
 {

@@ -25,9 +25,9 @@ namespace _Project.Scripts.WalletArea
         {
             if (Coins <= 0) return false;
             Coins--;
-            var offset = PlayerWallet.Instance.ThrowOffset;
+            var offset = PlayerWallet.ThrowOffset;
             var pos = (Vector2)_creator.position + new Vector2(offset.x * Flip, offset.y);
-            PlayerWallet.SpawnLoot(0, pos, PlayerWallet.Instance.ParentThrow, Flip);
+            PlayerWallet.SpawnLoot(0, pos, PlayerWallet.ParentThrow, Flip);
             return true;
         }
     }
