@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerMoveStats
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Stats.MovementStats
   maxSpeed: 7
-  sprintModifier: 1.35
+  sprintModifier: 1.4
   acceleration: 110
   deceleration: 60
