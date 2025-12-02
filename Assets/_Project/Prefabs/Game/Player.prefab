@@ -188,7 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Abilities.PickupResourceAbility
   controlType: 0
-  playerWallet: {fileID: 0}
   npcCollider: {fileID: 0}
 --- !u!70 &8935503310725106595
 CapsuleCollider2D:

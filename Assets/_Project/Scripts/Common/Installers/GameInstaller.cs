@@ -6,6 +6,7 @@ using _Project.Scripts.Common.EntryPoints;
 using Unity.Cinemachine;
 using UnityEngine;
 using System.Linq;
+using _Project.Scripts.Pay;
 using Zenject;
 
 namespace _Project.Scripts.Common.Installers
@@ -17,6 +18,7 @@ namespace _Project.Scripts.Common.Installers
         [SerializeField] private PlayerWallet playerWallet;
         
         [SerializeField] private MovementController npcMovement;
+        [SerializeField] private PayView basePayView;
         [SerializeField] private CinemachineCamera vCam;
         
         public override void InstallBindings()
@@ -36,6 +38,11 @@ namespace _Project.Scripts.Common.Installers
             Container.BindInterfacesAndSelfTo<NpcMoveBrain>().AsSingle().NonLazy();
             Container.Rebind<MoveBrain>().To<NpcMoveBrain>().FromResolve();
             Container.BindInterfacesAndSelfTo<MovementController>().FromInstance(npcMovement).AsTransient().NonLazy();
+
+            Container.Bind<int>().FromInstance(basePayView.Price).AsSingle().NonLazy();
+            Container.Bind<PayModel>().AsSingle().NonLazy();
+            Container.Bind<PayViewModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PayView>().FromInstance(basePayView).AsSingle().NonLazy();
             
             Container.Bind<CinemachineCamera>().FromInstance(vCam).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameEntryPoint>().AsSingle().NonLazy();
